@@ -8,32 +8,45 @@
 // ["hello","2","world", ":-)"] -> ["2", ":-)"]
 // ["1234", "1567","-2","computer science"] -> ["-2"]
 // ["Russia","Denmark", "Kazan"] -> []
-
+int InputNumbers(string input)
+{
+    Console.Write(input);
+    int output = Convert.ToInt32(Console.ReadLine());
+    return output;
+}
 string[] ArrayString(int size)
 {
     string[] arrString = new string[size];
-    
+
     for (int i = 0; i < size; i++)
     {
-        Console.Write($"Введите {i} элемент строкового массива - ");
+        Console.Write($"Введите {i + 1} элемент строкового массива - ");
         arrString[i] = Console.ReadLine();
     }
     return arrString;
 }
 
-string[] arrStringNumElements(int[] arr)
+string[] arrStringNumElements(string[] arr)
 {
-    string[] arrTemp= new string[];
-    int count=0;
+    string[] arrTemp;
+    int count = 0;
     for (int i = 0; i < arr.Length; i++)
     {
-        if ( arr[i].Length <3 )
+        if (arr[i].Length <= 3)
+            count++;
+    }
+    if (count!=0) arrTemp = new string[count];
+    else arrTemp = new string[count+1];
+    count = 0;
+    for (int i = 0; i < arr.Length; i++)
+    {
+        if (arr[i].Length <= 3)
         {
             arrTemp[count] = arr[i];
-            count+=1;
+            count++;
         }
     }
-    return new string[] {arrTemp};
+    return arrTemp;
 }
 
 void PrintArray(string[] arr)
@@ -41,20 +54,15 @@ void PrintArray(string[] arr)
     for (int i = 0; i < arr.Length; i++)
     {
         if (i == 0) Console.Write("[");
-        if (i < arr.Length - 1) Console.Write(arr[i] + ",");
-        else Console.Write(arr[i] + "]");
+        if (i < arr.Length - 1) Console.Write(arr[i] + ", ");
+        else Console.WriteLine(arr[i] + "]");
     }
 }
 
-// void PrintSumPosNegElem(int[] sum)
-// {
-//     Console.WriteLine();
-//     Console.WriteLine($"Сумма положительных чисел = {sum[0]}");
-//     Console.WriteLine($"Сумма отрицательных чисел = {sum[1]}");
-// }
-string[] array=ArrayString(5);
+int n = InputNumbers("Введите количество элементов массива ");
+string[] array = ArrayString(n);
 PrintArray(array);
-string[] arrayNew=arrStringNumElements(array);
+string[] arrayNew = arrStringNumElements(array);
 PrintArray(arrayNew);
-// int [] sumPosNegElem=GetSumPosNegElem(array);
-// PrintSumPosNegElem(sumPosNegElem);
+
+
